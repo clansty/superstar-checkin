@@ -20,6 +20,8 @@
   "dependencies": {
     "axios": "^0.21.4",
     "axios-cookiejar-support": "^2.0.0",
-    "tough-cookie": "^4.0.0"
+    "chalk": "^4.1.2",
+    "tough-cookie": "^4.0.0",
+    "yaml": "^1.10.2"
   }
 }
