@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES2017",
+    "esModuleInterop": true,
+    "sourceMap": false,
+    "moduleResolution": "Node",
+    "outDir": "build",
+    "skipLibCheck": true
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
