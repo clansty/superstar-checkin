@@ -14,5 +14,5 @@ export const warn = (...message) => {
 }
 
 export const error = (...message) => {
-    console.warn(chalk.red(`[${date()}][ERROR]`, ...message))
+    console.error(chalk.red(`[${date()}][ERROR]`, ...message))
 }

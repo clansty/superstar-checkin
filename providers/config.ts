@@ -10,6 +10,7 @@ interface Config {
         uin: number
         password: string,
         group: number
+        ignore?: number[]
     }
 }
 

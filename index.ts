@@ -5,6 +5,7 @@ import * as db from './providers/db'
 import {bot, loginBot} from './providers/bot'
 import loginAndSaveInfo from './utils/loginAndSaveInfo'
 import axios from 'axios'
+import attachGroupMessageHandler from './handlers/attachGroupMessageHandler'
 
 (async () => {
     //初始化数据库连接和 bot
@@ -29,6 +30,6 @@ import axios from 'axios'
     const schoolname = await db.getMeta<string>('schoolname')
     const name = await db.getMeta<string>('name')
     info(`欢迎来自 ${schoolname} 的 ${name}`)
-
-
+    //机器人接收二维码和解码签到事件
+    attachGroupMessageHandler(bot)
 })()
