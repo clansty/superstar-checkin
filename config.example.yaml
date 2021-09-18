@@ -1,0 +1,10 @@
+username: '学习通登录名'
+password: 学习通密码
+mongodb: mongodb://localhost
+dbName: superstar
+bot:
+  uin: qq机器人用户名
+  password: 机器人密码
+  group: 机器人工作的群组，建议专群专用
+  ignore:
+    - 忽略某个群成员发送的消息，一般指定同一群的其他机器人
