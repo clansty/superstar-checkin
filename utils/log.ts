@@ -5,14 +5,14 @@ const date = () => {
     return formatDate('yyyy/M/d h:mm:ss')
 }
 
-export const info = (message) => {
-    console.info(`[${date()}][INFO]`, message)
+export const info = (...message) => {
+    console.info(`[${date()}][INFO]`, ...message)
 }
 
-export const warn = (message) => {
-    console.warn(chalk.yellow(`[${date()}][WARN]`, message))
+export const warn = (...message) => {
+    console.warn(chalk.yellow(`[${date()}][WARN]`, ...message))
 }
 
-export const error = (message) => {
-    console.warn(chalk.red(`[${date()}][ERROR]`, message))
+export const error = (...message) => {
+    console.warn(chalk.red(`[${date()}][ERROR]`, ...message))
 }
