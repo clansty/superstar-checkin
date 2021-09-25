@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {UserInfoRet} from '../types/UserInfoRet'
+import UserInfoRet from '../types/UserInfoRet'
 import {PC_AGENT} from '../constants'
 import {error} from '../utils/log'
 

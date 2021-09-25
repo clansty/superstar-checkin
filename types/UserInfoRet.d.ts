@@ -1,4 +1,4 @@
-export interface UserInfoRet {
+export default interface UserInfoRet {
     msg: Msg;
     result: number;
 }

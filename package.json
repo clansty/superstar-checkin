@@ -12,6 +12,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@types/jsdom": "^16.2.13",
     "@types/node": "^16.9.2",
     "ts-node": "^10.2.1",
     "tsc": "^2.0.3",
@@ -21,7 +22,9 @@
     "axios": "^0.21.4",
     "axios-cookiejar-support": "^2.0.0",
     "chalk": "^4.1.2",
+    "cheerio": "^1.0.0-rc.10",
     "jimp": "^0.16.1",
+    "jsdom": "^17.0.0",
     "oicq": "^1.20.2",
     "qrcode-reader": "^1.0.4",
     "tough-cookie": "^4.0.0",

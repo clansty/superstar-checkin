@@ -4,7 +4,6 @@ import YAML from "yaml";
 interface Config {
   username: string;
   password: string;
-  dbName: string;
   bot: {
     uin: number;
     password: string;

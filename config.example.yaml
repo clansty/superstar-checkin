@@ -1,6 +1,5 @@
 username: '学习通登录名'
 password: 学习通密码
-dbName: YJSNPI
 bot:
   uin: qq机器人用户名
   password: 机器人密码

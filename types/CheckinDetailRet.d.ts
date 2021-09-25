@@ -1,4 +1,4 @@
-export interface CheckinDetailRet {
+export default interface CheckinDetailRet {
 
     result: number;
 
@@ -9,7 +9,6 @@ export interface CheckinDetailRet {
     errorMsg: object;
 
 }
-
 
 
 interface Data {

@@ -17,3 +17,17 @@ export const genQrcodeCheckinParams = (params: QrcodeCheckinParamsSrc) => ({
     fid: 200,
     appType: 15,
 })
+
+export const genSimpleCheckinParams=(params:{
+    activeId: string | number,
+    uid: string | number,
+    name: string,
+})=>({
+    ...params,
+    clientip: '',
+    useragent: '',
+    latitude: -1,
+    longitude: -1,
+    fid: 200,
+    appType: 15,
+})
