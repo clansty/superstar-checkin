@@ -5,15 +5,13 @@ import {bot, loginBot} from './providers/bot'
 import loginAndSaveInfo from './utils/loginAndSaveInfo'
 import axios from 'axios'
 import attachGroupMessageHandler from './handlers/attachGroupMessageHandler'
-import getImToken from './requests/getImToken'
 import {imConnect} from './providers/easemob'
 
 (async () => {
     //初始化数据库连接和 bot
     axios.defaults.proxy = false
     await db.connect()
-    // await loginBot()
-    info('系统初始化完毕')
+    await loginBot()
     //验证及获取 cookie
     let isCookieValid = false
     let cookie = await db.getMeta<string>('cookie')
@@ -34,4 +32,5 @@ import {imConnect} from './providers/easemob'
     //连接 IM
     info('准备连接 IM')
     await imConnect()
+    info('系统初始化完毕')
 })()
