@@ -8,42 +8,107 @@ import axios from "axios";
 import attachGroupMessageHandler from "./handlers/attachGroupMessageHandler";
 import jsdom from 'jsdom'
 const {JSDOM } = jsdom; //在jsdom中导出JSDOM对象
-const { window } = new JSDOM('<!doctype html><html><body></body></html>',{url: 'https://a1-vip6.easecdn.com'}); //导出JSDOM中的window对象
+const { window } = new JSDOM('<!doctype html><html><body></body></html>',{url: 'https://im.chaoxing.com/webim/me'}); //导出JSDOM中的window对象
 (global as any).window = window; //将window对象设置为nodejs中全局对象;
 (global as any).navigator = window.navigator;
 (global as any).location = window.location;
 (global as any).document = window.document;
-import websdk from 'easemob-websdk'
-
+(global as any).WebSocket = window.WebSocket;
+import './sdk/Easemob-chat-3.6.3'
 
 (async () => {
-  const conn = new websdk.connection({
-    "xmppURL": "https://im-api-vip6-v2.easecdn.com/ws",
-    "apiURL": "https://a1-vip6.easecdn.com",
-    "appkey": "cx-dev#cxstudy",
-    "Host": "easemob.com",
-    "https": true,
-    "isHttpDNS": false,
-    "isMultiLoginSessions": true,
-    "isAutoLogin": true,
-    "isWindowSDK": false,
-    "isSandBox": false,
-    "isDebug": false,
-    "autoReconnectNumMax": 2,
-    "autoReconnectInterval": 2,
-    "isWebRTC": true,
-    "heartBeatWait": 4500,
-    "delivery": false
+  window.WebIM.config = {
+    /*
+     * XMPP server
+     */
+    xmppURL: (window.location.protocol === "https:" ? "https:" : "http:") + "//im-api-vip6-v2.easecdn.com/ws",
+    /*
+     * Backend REST API URL
+     */
+    apiURL: (window.location.protocol === "https:" ? "https:" : "http:") + "//a1-vip6.easecdn.com",
+    /*
+     * Application AppKey
+     */
+    //appkey: '1128170303178846#testcx',
+    appkey: 'cx-dev#cxstudy',
+    /*
+     * Application Host
+     */
+    Host: "easemob.com",
+    /*
+     * Whether to use wss
+     * @parameter {Boolean} true or false
+     */
+    https: true,
+    isHttpDNS: false,
+    /*
+     * isMultiLoginSessions
+     * true: A visitor can sign in to multiple webpages and receive messages at all the webpages.
+     * false: A visitor can sign in to only one webpage and receive messages at the webpage.
+     */
+    isMultiLoginSessions: true,
+    /*
+     * Set to auto sign-in
+     */
+    isAutoLogin: true,
+    /**
+     * Whether to use window.doQuery()
+     * @parameter {Boolean} true or false
+     */
+    isWindowSDK: false,
+    /**
+     * isSandBox=true:  xmppURL: 'im-api-sandbox.easemob.com',  apiURL: '//a1-sdb.easemob.com',
+     * isSandBox=false: xmppURL: 'im-api.easemob.com',          apiURL: '//a1.easemob.com',
+     * @parameter {Boolean} true or false
+     */
+    isSandBox: false,
+    /**
+     * Whether to console.log in strophe.log()
+     * @parameter {Boolean} true or false
+     */
+    isDebug: true,
+    /**
+     * will auto connect the xmpp server autoReconnectNumMax times in background when client is offline.
+     * won't auto connect if autoReconnectNumMax=0.
+     */
+    autoReconnectNumMax: Number.POSITIVE_INFINITY,
+    /**
+     * the interval secons between each atuo reconnectting.
+     * works only if autoReconnectMaxNum >= 2.
+     */
+    autoReconnectInterval: 2,
+    /**
+     * webrtc supports WebKit and https only
+     */
+    isWebRTC: window.RTCPeerConnection && /^https\:$/.test(window.location.protocol),
+    /**
+     * after login, send empty message to xmpp server like heartBeat every 45s, to keep the ws connection alive.
+     */
+    heartBeatWait: 2000,
+    /**
+     * When a message arrived, the receiver send an ack message to the
+     * sender, in order to tell the sender the message has delivered.
+     * See call back function onReceivedMessage
+     */
+    delivery: false,
+  }
+  window.WebIM.conn = new window.WebIM.connection({
+    appKey: window.WebIM.config.appkey,
+    isHttpDNS: window.WebIM.config.isHttpDNS,
+    isMultiLoginSessions: window.WebIM.config.isMultiLoginSessions,
+    host: window.WebIM.config.Host,
+    https: window.WebIM.config.https,
+    url: window.WebIM.config.xmppURL,
+    apiUrl: window.WebIM.config.apiURL,
+    isAutoLogin: false,
+    heartBeatWait: window.WebIM.config.heartBeatWait,
+    autoReconnectNumMax: window.WebIM.config.autoReconnectNumMax,
+    autoReconnectInterval: window.WebIM.config.autoReconnectInterval,
+    isStropheLog: window.WebIM.config.isStropheLog,
+    delivery: window.WebIM.config.delivery
   })
-  const options = {
-    apiUrl : "https://a1-vip6.easecdn.com",
-    user : '',
-    accessToken : '',
-    appKey : 'cx-dev#cxstudy'
-  };
-  conn.open(options);
 
-  conn.listen({
+  window.WebIM.conn.listen({
     onOpened : function(message) { // 连接成功回调
       // 如果isAutoLogin设置为false，那么必须手动设置上线，否则无法收消息
       // 手动上线指的是调用conn.setPresence();
@@ -108,13 +173,21 @@ import websdk from 'easemob-websdk'
     onError : function(message) {
       //loginByToken(evenName, evenToken);
       console.log('连接失败', message);
-      throw new Error()
     }, // 失败回调
     onBlacklistUpdate : function(list) { // 黑名单变动
       // 查询黑名单，将好友拉黑，将好友从黑名单移除都会回调这个函数，list则是黑名单现有的所有好友信息
       console.log(list);
     }
   });
+
+  const options = {
+    apiUrl : "https://a1-vip6.easecdn.com",
+    user : '',
+    accessToken : '',
+    appKey : 'cx-dev#cxstudy'
+  };
+  window.WebIM.conn.open(options);
+
 
   return
 
