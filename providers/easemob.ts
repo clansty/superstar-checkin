@@ -14,6 +14,7 @@ import {info, success, warn} from '../utils/log'
 import * as db from './db'
 import getImToken from '../requests/getImToken'
 import handleEasemobMessage from '../handlers/handleEasemobMessage'
+import sleep from '../utils/sleep'
 
 window.WebIM.config = {
     xmppURL: 'https://im-api-vip6-v2.easecdn.com/ws',
@@ -26,7 +27,7 @@ window.WebIM.config = {
     isAutoLogin: true,
     isWindowSDK: false,
     isSandBox: false,
-    isDebug: true,
+    isDebug: false,
     autoReconnectNumMax: Number.POSITIVE_INFINITY,
     autoReconnectInterval: 2,
     isWebRTC: true,
@@ -47,6 +48,7 @@ window.WebIM.conn = new window.WebIM.connection({
     autoReconnectInterval: window.WebIM.config.autoReconnectInterval,
     isStropheLog: window.WebIM.config.isStropheLog,
     delivery: window.WebIM.config.delivery,
+    isDebug: window.WebIM.config.isDebug,
 })
 
 window.WebIM.conn.listen({
@@ -85,8 +87,14 @@ window.WebIM.conn.listen({
     onOffline: function () {
         warn('IM 下线')
     },
-    onError: function (message) {
+    onError: async function (message) {
         warn('IM 协议错误', message)
+        if(message.type===40){
+            window.WebIM.conn.close()
+            warn('IM 协议身份验证失败，重新获取 token')
+            await sleep(2000)
+            imConnect()
+        }
     },
     onBlacklistUpdate: function (list) {
     },
