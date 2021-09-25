@@ -1,4 +1,4 @@
-export interface LoginReturn {
+export default interface LoginReturn {
     mes: string;
     type: number;
     url: string;

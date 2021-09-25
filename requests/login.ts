@@ -3,7 +3,7 @@ import * as queryString from 'querystring'
 import {PC_AGENT} from '../constants'
 import {wrapper} from 'axios-cookiejar-support'
 import {CookieJar} from 'tough-cookie'
-import {LoginReturn} from '../types/LoginReturn'
+import LoginReturn from '../types/LoginReturn'
 
 const jar = new CookieJar()
 const client = wrapper(axios.create({jar, proxy: false}))

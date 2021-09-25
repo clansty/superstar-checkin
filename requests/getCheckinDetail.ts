@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {MOBILE_AGENT} from '../constants'
-import {CheckinDetailRet} from '../types/CheckinDetailRet'
+import CheckinDetailRet from '../types/CheckinDetailRet'
 import {error} from '../utils/log'
 
 /**
