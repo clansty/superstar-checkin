@@ -13,6 +13,7 @@ import '../sdk/Easemob-chat-3.6.3'
 import {info, success, warn} from '../utils/log'
 import * as db from './db'
 import getImToken from '../requests/getImToken'
+import handleEasemobMessage from '../handlers/handleEasemobMessage'
 
 window.WebIM.config = {
     xmppURL: 'https://im-api-vip6-v2.easecdn.com/ws',
@@ -56,8 +57,8 @@ window.WebIM.conn.listen({
         warn('IM 协议连接关闭')
     },
     onTextMessage: function (message) {
-        info('IM 协议收到文本消息--', message)
-        //todo 这里处理签到
+        info('IM 协议收到文本消息', JSON.stringify(message))
+        handleEasemobMessage(message)
     },
     onEmojiMessage: function (message) {
     },
@@ -82,6 +83,7 @@ window.WebIM.conn.listen({
     onOnline: function () {
     },
     onOffline: function () {
+        warn('IM 下线')
     },
     onError: function (message) {
         warn('IM 协议错误', message)
