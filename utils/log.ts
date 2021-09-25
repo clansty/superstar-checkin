@@ -18,5 +18,5 @@ export const error = (...message) => {
 }
 
 export const success = (...message) => {
-    console.error(chalk.green(`[${date()}][SUCCESS]`), ...message)
+    console.info(chalk.green(`[${date()}][SUCCESS]`), ...message)
 }
