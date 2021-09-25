@@ -182,8 +182,8 @@ import './sdk/Easemob-chat-3.6.3'
 
   const options = {
     apiUrl : "https://a1-vip6.easecdn.com",
-    user : '',
-    accessToken : '',
+    user : 'a',
+    accessToken : 'a',
     appKey : 'cx-dev#cxstudy'
   };
   window.WebIM.conn.open(options);
