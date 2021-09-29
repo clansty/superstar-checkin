@@ -3,6 +3,9 @@ password: 学习通密码
 bot:
   uin: qq机器人用户名
   password: 机器人密码
-  group: 机器人工作的群组，建议专群专用
+  notifyGroups:
+    - 签到时通知的群组
+  qrcodeGroups:
+    - 接收二维码的群组
   ignore:
     - 忽略某个群成员发送的消息，一般指定同一群的其他机器人

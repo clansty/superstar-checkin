@@ -7,7 +7,7 @@ import handlerQrcodeSign from './handlerQrcodeSign'
 
 export default (bot: Client) => bot.on('message.group', async data => {
     //检查来源
-    if (data.group_id !== config.bot.group) return
+    if (!config.bot.qrcodeGroups.includes(data.group_id)) return
     //检查屏蔽名单，防止两个机器人一台戏
     if (config.bot.ignore && config.bot.ignore.includes(data.user_id)) return
     //处理 ping 请求

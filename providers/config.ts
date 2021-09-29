@@ -7,7 +7,8 @@ interface Config {
   bot: {
     uin: number;
     password: string;
-    group: number;
+    notifyGroups: number[];
+    qrcodeGroups: number[];
     ignore?: number[];
   };
 }

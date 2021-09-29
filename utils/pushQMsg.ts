@@ -3,5 +3,7 @@ import {bot} from '../providers/bot'
 import config from '../providers/config'
 
 export default async (message: Sendable) => {
-    await bot.sendGroupMsg(config.bot.group, message)
+    for (const group of config.bot.notifyGroups) {
+        await bot.sendGroupMsg(group, message)
+    }
 }
