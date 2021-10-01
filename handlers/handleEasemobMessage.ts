@@ -16,7 +16,7 @@ export default async (message: ImMessageCheckin) => {
         const aid = message.ext.attachment.att_chat_course.aid
         const courseName = message.ext.attachment.att_chat_course.courseInfo.coursename
         const courseId = Number(message.ext.attachment.att_chat_course.courseInfo.courseid)
-        if (config.ignoreLessons.includes(courseId)) return
+        if (config.ignoreCourses.includes(courseId)) return
         if (!aid) {
             warn('处理 IM 消息时出现异常，找不到 aid')
             return
