@@ -11,6 +11,7 @@ interface Config {
     qrcodeGroups: number[];
     ignore?: number[];
   };
+  ignoreLessons: number[];
 }
 
 export default YAML.parse(fs.readFileSync("config.yaml", "utf-8")) as Config;

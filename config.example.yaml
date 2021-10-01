@@ -9,3 +9,5 @@ bot:
     - 接收二维码的群组
   ignore:
     - 忽略某个群成员发送的消息，一般指定同一群的其他机器人
+ignoreLessons:
+  - course id

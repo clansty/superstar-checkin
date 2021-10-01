@@ -4,6 +4,7 @@ import getCheckinDetail from '../requests/getCheckinDetail'
 import * as db from '../providers/db'
 import handlerSimpleCheckin from './handlerSimpleCheckin'
 import pushQMsg from '../utils/pushQMsg'
+import config from '../providers/config'
 
 export default async (message: ImMessageCheckin) => {
     try {
@@ -14,6 +15,8 @@ export default async (message: ImMessageCheckin) => {
         }
         const aid = message.ext.attachment.att_chat_course.aid
         const courseName = message.ext.attachment.att_chat_course.courseInfo.coursename
+        const courseId = Number(message.ext.attachment.att_chat_course.courseInfo.courseid)
+        if (config.ignoreLessons.includes(courseId)) return
         if (!aid) {
             warn('处理 IM 消息时出现异常，找不到 aid')
             return
@@ -44,7 +47,7 @@ export default async (message: ImMessageCheckin) => {
                 pushQMsg(mts)
                 break
             default:
-                const activityName=message.ext.attachment.att_chat_course.atypeName
+                const activityName = message.ext.attachment.att_chat_course.atypeName
                 pushQMsg(`收到 ${courseName} 的 ${activityName} 类型活动`)
         }
     } catch (e) {
