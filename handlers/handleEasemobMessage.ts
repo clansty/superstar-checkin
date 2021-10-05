@@ -27,18 +27,21 @@ export default async (message: ImMessageCheckin) => {
                 info('收到', checkinInfo.type, '类型签到')
                 let mts = `收到 ${courseName} 的签到\n类型：${checkinInfo.type}`
                 if (checkinInfo.type !== 'qr') {
-                    try {
-                        const res = await handlerSimpleCheckin(aid)
-                        mts += `\n自动签到：${res}`
-                        if (res === 'success') {
-                            success('签到成功', aid)
+                    setTimeout(async () => {
+                        try {
+                            const res = await handlerSimpleCheckin(aid)
+                            if (res === 'success') {
+                                success('签到成功', aid)
+                            }
+                            else {
+                                warn('签到失败', aid, res)
+                                pushQMsg(`自动签到：${res}`)
+                            }
+                        } catch (e) {
+                            error('签到失败', aid, e)
+                            pushQMsg(`自动签到：抛错\n${e}`)
                         }
-                        else
-                            warn('签到失败', aid, res)
-                    } catch (e) {
-                        error('签到失败', aid, e)
-                        mts += `\n自动签到：抛错\n${e}`
-                    }
+                    }, 30 * 1000)
                 }
                 else {
                     info('收到二维码签到')
