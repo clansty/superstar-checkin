@@ -12,6 +12,12 @@ interface Config {
     ignore?: number[];
   };
   ignoreCourses: number[];
+  geoLocations: Array<{
+    courseId: number
+    lat: number,
+    lon: number,
+    address: string
+  }>
 }
 
 export default YAML.parse(fs.readFileSync("config.yaml", "utf-8")) as Config;

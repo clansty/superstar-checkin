@@ -1,10 +1,11 @@
 import ImMessageCheckin from '../types/ImMessageCheckin'
-import {error, info, success, warn} from '../utils/log'
+import { error, info, success, warn } from '../utils/log'
 import getCheckinDetail from '../requests/getCheckinDetail'
 import * as db from '../providers/db'
 import handlerSimpleCheckin from './handlerSimpleCheckin'
 import pushQMsg from '../utils/pushQMsg'
 import config from '../providers/config'
+import handleGeoCheckin from './handleGeoCheckin'
 
 export default async (message: ImMessageCheckin) => {
     try {
@@ -29,7 +30,11 @@ export default async (message: ImMessageCheckin) => {
                 if (checkinInfo.type !== 'qr') {
                     setTimeout(async () => {
                         try {
-                            const res = await handlerSimpleCheckin(aid)
+                            let res
+                            if (checkinInfo.type === 'location')
+                                res = await handleGeoCheckin(aid, courseId)
+                            else
+                                res = await handlerSimpleCheckin(aid)
                             if (res === 'success') {
                                 success('签到成功', aid)
                             }
