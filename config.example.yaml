@@ -1,7 +1,7 @@
 username: '学习通登录名'
 password: 学习通密码
 bot:
-  uin: qq机器人用户名
+  uin: qq机器人用户名，或者`disabled`
   password: 机器人密码
   notifyGroups:
     - 签到时通知的群组
@@ -11,3 +11,8 @@ bot:
     - 忽略某个群成员发送的消息，一般指定同一群的其他机器人
 ignoreCourses:
   - course id
+geoLocations:
+  - courseId: 233333
+    lat:
+    lon:
+    address: 地图显示的地址

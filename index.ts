@@ -1,10 +1,9 @@
 import validateCookie from './requests/validateCookie'
 import {info, success, warn} from './utils/log'
 import * as db from './providers/db'
-import {bot, loginBot} from './providers/bot'
+import {loginBot} from './providers/bot'
 import loginAndSaveInfo from './utils/loginAndSaveInfo'
 import axios from 'axios'
-import attachGroupMessageHandler from './handlers/attachGroupMessageHandler'
 import {imConnect} from './providers/easemob'
 
 (async () => {
@@ -27,8 +26,6 @@ import {imConnect} from './providers/easemob'
     const schoolname = await db.getMeta<string>('schoolname')
     const name = await db.getMeta<string>('name')
     success(`欢迎来自 ${schoolname} 的 ${name}`)
-    //机器人接收二维码和解码签到事件
-    attachGroupMessageHandler(bot)
     //连接 IM
     info('准备连接 IM')
     await imConnect()

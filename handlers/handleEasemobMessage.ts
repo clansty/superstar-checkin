@@ -3,7 +3,7 @@ import { error, info, success, warn } from '../utils/log'
 import getCheckinDetail from '../requests/getCheckinDetail'
 import * as db from '../providers/db'
 import handlerSimpleCheckin from './handlerSimpleCheckin'
-import pushQMsg from '../utils/pushQMsg'
+import {pushQMsg} from '../providers/bot'
 import config from '../providers/config'
 import handleGeoCheckin from './handleGeoCheckin'
 

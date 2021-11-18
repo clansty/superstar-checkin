@@ -5,7 +5,7 @@ interface Config {
   username: string;
   password: string;
   bot: {
-    uin: number;
+    uin: number | 'disabled';
     password: string;
     notifyGroups: number[];
     qrcodeGroups: number[];
