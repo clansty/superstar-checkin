@@ -1,5 +1,5 @@
 import ImMessageCheckin from '../types/ImMessageCheckin'
-import { error, info, success, warn } from '../utils/log'
+import {error, info, success, warn} from '../utils/log'
 import getCheckinDetail from '../requests/getCheckinDetail'
 import * as db from '../providers/db'
 import handlerSimpleCheckin from './handlerSimpleCheckin'
@@ -23,6 +23,9 @@ export default async (message: ImMessageCheckin) => {
             return
         }
         switch (message.ext.attachment.att_chat_course.atype) {
+            case 0:
+                // 可能是签到
+                if (!isSignActivity(message)) return
             case 2:
                 const checkinInfo = await getCheckinDetail(await db.getMeta<string>('cookie'), aid)
                 info('收到', checkinInfo.type, '类型签到')
@@ -61,4 +64,24 @@ export default async (message: ImMessageCheckin) => {
     } catch (e) {
         error('处理 IM 消息时出现异常，可能不是活动消息', e)
     }
+}
+
+// 用于判断一个 atype=0 的消息是不是变相的签到消息
+const isSignActivity = (atype0Activity: ImMessageCheckin) => {
+    if (atype0Activity.ext.attachment.att_chat_course.pcUrl.toLowerCase().includes('sign')) {
+        return true
+    }
+    if (atype0Activity.ext.attachment.att_chat_course.pcUrl.toLowerCase().includes('checkin')) {
+        return true
+    }
+    if (atype0Activity.ext.attachment.att_chat_course.url.toLowerCase().includes('sign')) {
+        return true
+    }
+    if (atype0Activity.ext.attachment.att_chat_course.url.toLowerCase().includes('checkin')) {
+        return true
+    }
+    if (atype0Activity.ext.attachment.att_chat_course.logo.toLowerCase().includes('qd3.png')) {
+        return true
+    }
+    return atype0Activity.ext.attachment.att_chat_course.title.includes('签到')
 }
