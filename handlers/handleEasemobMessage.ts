@@ -3,12 +3,15 @@ import {error, info, success, warn} from '../utils/log'
 import getCheckinDetail from '../requests/getCheckinDetail'
 import * as db from '../providers/db'
 import handlerSimpleCheckin from './handlerSimpleCheckin'
-import {pushQMsg} from '../providers/bot'
+import {pushQMsg, pushQMsgToFirstGroup} from '../providers/bot'
 import config from '../providers/config'
 import handleGeoCheckin from './handleGeoCheckin'
 
 export default async (message: ImMessageCheckin) => {
     try {
+        if (message.data === 'test') {
+            pushQMsgToFirstGroup('测试成功，WebSocket 在线')
+        }
         if (!message.ext.attachment) return
         if (message.ext.attachment.attachmentType !== 15) {
             //不是签到信息

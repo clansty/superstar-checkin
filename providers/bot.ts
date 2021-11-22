@@ -1,4 +1,4 @@
-import {Client, createClient, Sendable} from 'oicq'
+import {Client, Sendable} from 'oicq'
 import config from './config'
 import attachGroupMessageHandler from '../handlers/attachGroupMessageHandler'
 
@@ -6,8 +6,7 @@ let bot: Client
 
 export const loginBot = () => new Promise<any>(resolve => {
   if (config.bot.uin === 'disabled') return resolve(0)
-  bot = createClient(config.bot.uin, {
-    brief: true,
+  bot = new Client(config.bot.uin, {
     log_level: 'warn',
   })
   bot.once('system.online', resolve)
@@ -19,6 +18,11 @@ export const loginBot = () => new Promise<any>(resolve => {
 export const pushQMsg = async (message: Sendable) => {
   if (config.bot.uin === 'disabled') return
   for (const group of config.bot.notifyGroups) {
-    await bot.sendGroupMsg(group, message)
+    await bot.pickGroup(group).sendMsg(message)
   }
+}
+
+export const pushQMsgToFirstGroup = async (message: Sendable) => {
+  if (config.bot.uin === 'disabled') return
+  await bot.pickGroup(config.bot.notifyGroups[0]).sendMsg(message)
 }

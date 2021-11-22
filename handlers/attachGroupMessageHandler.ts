@@ -1,4 +1,4 @@
-import {Client, ImgPttElem} from 'oicq'
+import {Client, ImageElem} from 'oicq'
 import config from '../providers/config'
 import {info} from '../utils/log'
 import axios from 'axios'
@@ -16,10 +16,10 @@ export default (bot: Client) => bot.on('message.group', async data => {
         return
     }
     //检查图片
-    const imageElem = data.message.find(e => e.type === 'image') as ImgPttElem
+    const imageElem = data.message.find(e => e.type === 'image') as ImageElem
     if (!imageElem) return info('不是图片')
     //获取图片，识别二维码
-    const buf = (await axios.get<Buffer>(imageElem.data.url, {
+    const buf = (await axios.get<Buffer>(imageElem.url, {
         responseType: 'arraybuffer',
     })).data
     try {
