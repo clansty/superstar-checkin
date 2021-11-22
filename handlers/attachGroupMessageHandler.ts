@@ -37,6 +37,6 @@ export default (bot: Client) => bot.on('message.group', async data => {
         else
             data.reply(message)
     } catch (e) {
-        data.reply(`二维码解码失败：${e}`)
+        // data.reply(`二维码解码失败：${e}`)
     }
 })
