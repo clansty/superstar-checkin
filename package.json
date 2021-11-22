@@ -29,5 +29,6 @@
     "qrcode-reader": "^1.0.4",
     "tough-cookie": "^4.0.0",
     "yaml": "^1.10.2"
-  }
+  },
+  "packageManager": "yarn@3.1.0"
 }
