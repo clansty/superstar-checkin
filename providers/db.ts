@@ -22,6 +22,10 @@ export const getMeta = async <T>(name: string) => {
 
 export const setMeta = async <T>(name: string, value: T) => {
     meta[name] = value
+    await fs.writeFile(
+        './data/superstar-data.json',
+        JSON.stringify(meta, null, 2),
+    )
 }
 
 process.on('SIGINT', () => {

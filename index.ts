@@ -5,6 +5,7 @@ import {loginBot} from './providers/bot'
 import loginAndSaveInfo from './utils/loginAndSaveInfo'
 import axios from 'axios'
 import {imConnect} from './providers/easemob'
+import config from './providers/config'
 
 (async () => {
     //初始化数据库连接和 bot
@@ -14,6 +15,10 @@ import {imConnect} from './providers/easemob'
     //验证及获取 cookie
     let isCookieValid = false
     let cookie = await db.getMeta<string>('cookie')
+    if (await db.getMeta<string>('username') !== config.username) {
+        // 如果用户名不一致，则不应该用老的 cookie
+        cookie = ''
+    }
     if (cookie) {
         isCookieValid = await validateCookie(cookie)
         if (isCookieValid) info('Cookie 有效')

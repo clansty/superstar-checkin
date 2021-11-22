@@ -6,11 +6,11 @@
   "scripts": {
     "start": "node build/index.js",
     "dev": "ts-node index.ts",
-    "build": "tsc"
+    "build": "tsc && cp -a --reflink=auto --remove-destination ./sdk ./build/"
   },
   "keywords": [],
   "author": "",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "devDependencies": {
     "@types/jsdom": "^16.2.13",
     "@types/node": "^16.9.2",
