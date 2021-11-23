@@ -1,9 +1,8 @@
 import * as fs from "fs";
 import YAML from "yaml";
+import Account from '../types/Account'
 
 interface Config {
-  username: string;
-  password: string;
   bot: {
     uin: number | 'disabled';
     password: string;
@@ -18,6 +17,7 @@ interface Config {
     lon: number,
     address: string
   }>
+  accounts: Array<Account>
 }
 
 export default YAML.parse(fs.readFileSync("config.yaml", "utf-8")) as Config;

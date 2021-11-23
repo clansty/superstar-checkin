@@ -3,7 +3,10 @@ import config from '../providers/config'
 import {info} from '../utils/log'
 import axios from 'axios'
 import decodeQrCode from '../utils/decodeQrCode'
-import handlerQrcodeSign from './handlerQrcodeSign'
+import handlerQrcodeSign from './handleQrcodeCheckin'
+import accountsManager from '../utils/accountsManager'
+import handleGeoCheckin from './handleGeoCheckin'
+import handlerSimpleCheckin from './handleSimpleCheckin'
 
 export default (bot: Client) => bot.on('message.group', async data => {
     //检查来源
@@ -31,8 +34,16 @@ export default (bot: Client) => bot.on('message.group', async data => {
             const exec = REGEX_ENC.exec(dec)
             message += `aid: ${exec[1]}\nenc: ${exec[2]}\n正在执行签到...`
             data.reply(message)
-            const ret = await handlerQrcodeSign(exec[1], exec[2])
-            data.reply(ret)
+            let res = ''
+            for (const account of config.accounts) {
+                const accountMeta = await accountsManager.getAccountData(account.username)
+                res += '\n' + accountMeta.name + '：'
+                info('开始签到', account.username)
+                const ret = await handlerQrcodeSign(exec[1], exec[2], accountMeta)
+                res += ret
+                info('签到结束', account.username, ret)
+            }
+            data.reply(res)
         }
         else
             data.reply(message)

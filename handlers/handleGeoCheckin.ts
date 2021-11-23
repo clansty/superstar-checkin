@@ -1,24 +1,26 @@
-import * as db from '../providers/db'
-import { genGeoCheckinParams, genSimpleCheckinParams } from '../utils/genCheckinParams'
+import {genGeoCheckinParams} from '../utils/genCheckinParams'
 import checkin from '../requests/checkin'
 import config from '../providers/config'
+import AccountMetaData from '../types/AccountMetaData'
+import handlerSimpleCheckin from './handleSimpleCheckin'
 
-export default async (activeId: string | number, courseId: number) => {
-    const cookie = await db.getMeta<string>('cookie')
-    const name = await db.getMeta<string>('name')
-    const uid = await db.getMeta<number>('uid')
-
+export default async (activeId: string | number, courseId: number, account: AccountMetaData) => {
     const geoInfo = config.geoLocations.find(e => e.courseId === courseId)
     let params
 
-    if (geoInfo)
+    if (geoInfo) {
         params = genGeoCheckinParams({
-            uid, name, activeId,
+            uid: account.uid,
+            name: account.name,
+            activeId,
             latitude: geoInfo.lat,
             longitude: geoInfo.lon,
-            address: geoInfo.address
+            address: geoInfo.address,
         })
-    else
-        params = genSimpleCheckinParams({ uid, activeId, name })
-    return await checkin(cookie, params)
+        return await checkin(account.cookie, params)
+    }
+    else {
+        console.warn(`课程 ID ${courseId} 没有设置位置信息，将不提交位置信息`)
+        return (await handlerSimpleCheckin(activeId, account)) + `\n警告：课程 ID ${courseId} 没有设置位置信息，将不提交位置信息`
+    }
 }

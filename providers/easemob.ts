@@ -11,10 +11,15 @@ const {window} = new JSDOM('<!doctype html><html><body></body></html>', {url: 'h
 (global as any).WebSocket = window.WebSocket
 import '../sdk/Easemob-chat-3.6.3'
 import {info, success, warn} from '../utils/log'
-import * as db from './db'
 import getImToken from '../requests/getImToken'
 import handleEasemobMessage from '../handlers/handleEasemobMessage'
 import sleep from '../utils/sleep'
+
+// 登录环信所用的帐号信息的缓存
+const account = {
+    cookie: '',
+    uid: 0,
+}
 
 window.WebIM.config = {
     xmppURL: 'https://im-api-vip6-v2.easecdn.com/ws',
@@ -60,7 +65,7 @@ window.WebIM.conn.listen({
     },
     onTextMessage: function (message) {
         info('IM 协议收到文本消息', JSON.stringify(message))
-        handleEasemobMessage(message)
+        handleEasemobMessage(message, account.cookie)
     },
     onEmojiMessage: function (message) {
     },
@@ -89,11 +94,11 @@ window.WebIM.conn.listen({
     },
     onError: async function (message) {
         warn('IM 协议错误', message)
-        if(message.type===40){
+        if (message.type === 40) {
             window.WebIM.conn.close()
             warn('IM 协议身份验证失败，重新获取 token')
             await sleep(2000)
-            imConnect()
+            imConnect(account.cookie, account.uid)
         }
     },
     onBlacklistUpdate: function (list) {
@@ -110,9 +115,9 @@ const connect = (user: string | number, accessToken: string) => {
     window.WebIM.conn.open(options)
 }
 
-export const imConnect = async () => {
-    const cookie = await db.getMeta<string>('cookie')
-    const uid = await db.getMeta<number>('uid')
+export const imConnect = async (cookie: string, uid: number) => {
+    account.cookie = cookie
+    account.uid = uid
     const imToken = await getImToken(cookie)
     connect(uid, imToken)
 }
