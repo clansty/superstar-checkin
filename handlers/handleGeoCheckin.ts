@@ -3,9 +3,22 @@ import checkin from '../requests/checkin'
 import config from '../providers/config'
 import AccountMetaData from '../types/AccountMetaData'
 import handlerSimpleCheckin from './handleSimpleCheckin'
+import GeoLocation from '../types/GeoLocation'
+
+const inferCourseGeoInfo = (geoLocations: Array<GeoLocation>, courseId: number) => {
+    const weekDay = new Date().getDay()
+    const locations = geoLocations.filter(e => e.courseId === courseId)
+    for (const location of locations) {
+        if (!location.onlyOnWeekdays)
+            return location
+        else if (location.onlyOnWeekdays && location.onlyOnWeekdays.includes(weekDay)) {
+            return location
+        }
+    }
+}
 
 export default async (activeId: string | number, courseId: number, account: AccountMetaData) => {
-    const geoInfo = config.geoLocations.find(e => e.courseId === courseId)
+    const geoInfo = inferCourseGeoInfo(config.geoLocations, courseId)
     let params
 
     if (geoInfo) {
