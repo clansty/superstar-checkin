@@ -1,15 +1,14 @@
 import ImMessageCheckin from '../types/ImMessageCheckin'
-import {error, info, success, warn} from '../utils/log'
-import getCheckinDetail from '../requests/getCheckinDetail'
-import * as db from '../providers/db'
-import handlerSimpleCheckin from './handleSimpleCheckin'
+import {error, info, warn} from '../utils/log'
 import {pushQMsg, pushQMsgToFirstGroup} from '../providers/bot'
 import config from '../providers/config'
-import handleGeoCheckin from './handleGeoCheckin'
 import handleSign from './handleCheckin'
+import getCheckinDetail from '../requests/getCheckinDetail'
+import getRandomIntInclusive from '../utils/getRandomIntInclusive'
 
 /**
  * 处理环信消息
+ *
  * @param message 收到的环信消息，解析为签到的消息结构体，到底是不是签到需要自行判断
  * @param cookie 登录环信所使用的 cookie，需要传递给下面的函数用于获取共用的签到详细信息之类
  */
@@ -37,20 +36,32 @@ export default async (message: ImMessageCheckin, cookie: string) => {
                 if (!isSignActivity(message)) {
                     const activityName = message.ext.attachment.att_chat_course.atypeName
                     if (activityName) {
-                        pushQMsg(`收到 ${courseName} 的 ${activityName} 类型活动`)
+                        pushQMsg(`收到 ${courseName} 的 ${activityName} 类型活动\naid: ${aid}`)
                     }
                     else {
-                        pushQMsg(`收到 ${courseName} 的未知类型活动，需要引起注意`)
+                        pushQMsg(`收到 ${courseName} 的未知类型活动，需要引起注意\naid: ${aid}`)
                     }
                     return
                 }
             // 如果是签到，直接进入 case 2 处理
             case 2:
-                await handleSign(aid, courseName, courseId, cookie)
+                const checkinInfo = await getCheckinDetail(cookie, aid)
+                const sleepTime = getRandomIntInclusive(20, 35)
+                if (checkinInfo.type !== 'qr') {
+                    info('收到', checkinInfo.type, '类型签到，延迟时间', sleepTime, '秒')
+                    pushQMsg(`收到 ${courseName} 的签到\n类型：${checkinInfo.type}\naid:${aid}\n将在 ${sleepTime} 秒后自动签到`)
+                    setTimeout(async () => {
+                        pushQMsg(await handleSign(aid, courseId, checkinInfo))
+                    }, sleepTime * 1000)
+                }
+                else {
+                    info('收到二维码签到')
+                    pushQMsg(`收到 ${courseName} 的二维码签到，aid 为 ${aid}，需要提供一张二维码`)
+                }
                 break
             default:
                 const activityName = message.ext.attachment.att_chat_course.atypeName
-                pushQMsg(`收到 ${courseName} 的 ${activityName} 类型活动`)
+                pushQMsg(`收到 ${courseName} 的 ${activityName} 类型活动\naid: ${aid}`)
         }
     } catch (e) {
         error('处理 IM 消息时出现异常，可能不是活动消息', e)

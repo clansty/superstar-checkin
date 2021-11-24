@@ -2,13 +2,14 @@ import axios from 'axios'
 import {MOBILE_AGENT} from '../constants'
 import CheckinDetailRet from '../types/CheckinDetailRet'
 import {error} from '../utils/log'
+import CheckinInfo from '../types/CheckinInfo'
 
 /**
  * 获取签到活动详情
  * @param cookie
  * @param activeId active ID
  */
-export default async (cookie: string, activeId: number | string) => {
+export default async (cookie: string, activeId: number | string): Promise<CheckinInfo> => {
     const ret = await axios.get<CheckinDetailRet>('https://mobilelearn.chaoxing.com/v2/apis/active/getPPTActiveInfo', {
         headers: {
             Cookie: cookie,
