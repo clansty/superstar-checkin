@@ -25,7 +25,7 @@
     "cheerio": "^1.0.0-rc.10",
     "jimp": "^0.16.1",
     "jsdom": "^17.0.0",
-    "oicq": "^2.1.4",
+    "oicq": "1.21.3",
     "qrcode-reader": "^1.0.4",
     "tough-cookie": "^4.0.0",
     "yaml": "^1.10.2"
