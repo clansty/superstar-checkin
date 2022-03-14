@@ -9,3 +9,66 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Session {
+  id            Int      @id @default(autoincrement())
+  name          String   @unique
+  dcId          Int?
+  port          Int?
+  serverAddress String?
+  authKey       Bytes?
+  entities      Entity[]
+}
+
+model Entity {
+  id        Int     @id @default(autoincrement())
+  // 源代码里面大概支持 string 和 BigInteger，不如先全都存 String
+  entityId  String
+  sessionId Int
+  session   Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  hash      String?
+  username  String?
+  phone     String?
+  name      String?
+
+  @@unique([entityId, sessionId])
+}
+
+model SuperstarAccount {
+  id         Int     @id @default(autoincrement())
+  username   String  @unique
+  password   String
+  // 以下属性首次登录之后生成
+  cookie     String?
+  name       String?
+  schoolName String?
+  uid        Int?
+}
+
+model IgnoredCourse {
+  id       Int @id @default(autoincrement())
+  // 这里的 courseId 是学习通里的 ID
+  courseId Int @unique
+}
+
+model GeoLocation {
+  id          Int          @id @default(autoincrement())
+  lat         Int
+  lon         Int
+  address     String
+  // 关联的时间们
+  courseTimes CourseTime[]
+}
+
+// 课程和时间的组合，可以关联位置
+model CourseTime {
+  id            Int         @id @default(autoincrement())
+  // 取从 0 点到现在的秒数吧
+  startTime     Int
+  endTime       Int
+  // 多个 weekDay 的话，就创建多个记录
+  weekDay       Int
+  // 可以是多对一
+  geoLocationId Int
+  geoLocation   GeoLocation @relation(fields: [geoLocationId], references: [id], onDelete: Cascade)
+}
