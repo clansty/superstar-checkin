@@ -630,12 +630,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^0.23.0":
-  version: 0.23.0
-  resolution: "axios@npm:0.23.0"
+"axios@npm:^0.24.0":
+  version: 0.24.0
+  resolution: "axios@npm:0.24.0"
   dependencies:
     follow-redirects: ^1.14.4
-  checksum: 879f61022bd825da2a7ebb72410bc528683ba54c140436baa0b924b7cab02ec0919fe64a04a546f482a75f5fd570b77884f9826764a95f2fd88265e61dcb70db
+  checksum: 468cf496c08a6aadfb7e699bebdac02851e3043d4e7d282350804ea8900e30d368daa6e3cd4ab83b8ddb5a3b1e17a5a21ada13fc9cebd27b74828f47a4236316
   languageName: node
   linkType: hard
 
@@ -1427,18 +1427,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"oicq@npm:^2.1.8":
-  version: 2.1.8
-  resolution: "oicq@npm:2.1.8"
+"oicq@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "oicq@npm:2.2.0"
   dependencies:
-    axios: ^0.23.0
+    axios: ^0.24.0
     jsqr: ^1.4.0
     log4js: ^6.3.0
     long: ^4.0.0
     pngjs: ^6.0.0
-    probe-image-size: ^7.2.1
+    probe-image-size: ^7.2.2
     qrcode-terminal: ^0.12.0
-  checksum: 3c8314c0db5c9f63c08c1317a386df7e32d9522c927a17e4af5c97ad4bb8776154f62fdba174b4c8071a1ab886ceb01e9dba877b387e8ae9735a6d2758a3de0c
+  checksum: 13157b51935e703d4573e4b35abd9480db2e5d3ff406641b44b3884f6178732edeb99977a4f72fec1f8c38b8b608e89da6cc1b055792c6969ee26d90b68e49f3
   languageName: node
   linkType: hard
 
@@ -1556,14 +1556,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"probe-image-size@npm:^7.2.1":
-  version: 7.2.1
-  resolution: "probe-image-size@npm:7.2.1"
+"probe-image-size@npm:^7.2.2":
+  version: 7.2.3
+  resolution: "probe-image-size@npm:7.2.3"
   dependencies:
     lodash.merge: ^4.6.2
     needle: ^2.5.2
     stream-parser: ~0.3.1
-  checksum: a902c4fb23c7cf75d6e7717adf51de9ba4b19388945b195a7baba92befee4a032d2953dc9b7414db7f9d954a952f69cd5067642b5ac79a1a540c9429c8846e78
+  checksum: 1a5eeb8f5cb979172144a5d7a017c70fcd664ccc8af9ad3a803903ee81864abea4036adae4fc6e66e9ae21bd3ce0febefaf1f32e65a77ff226b2eb61e9e4978c
   languageName: node
   linkType: hard
 
@@ -1680,7 +1680,7 @@ __metadata:
     cheerio: ^1.0.0-rc.10
     jimp: ^0.16.1
     jsdom: ^17.0.0
-    oicq: ^2.1.8
+    oicq: ^2.2.0
     qrcode-reader: ^1.0.4
     tough-cookie: ^4.0.0
     ts-node: ^10.2.1

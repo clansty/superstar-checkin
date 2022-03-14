@@ -5,6 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "start": "node build/index.js",
+    "start-docker": "node index.js",
     "dev": "ts-node index.ts",
     "build": "tsc && cp -a --reflink=auto --remove-destination ./sdk ./build/"
   },
@@ -25,7 +26,7 @@
     "cheerio": "^1.0.0-rc.10",
     "jimp": "^0.16.1",
     "jsdom": "^17.0.0",
-    "oicq": "^2.1.8",
+    "oicq": "^2.2.0",
     "qrcode-reader": "^1.0.4",
     "tough-cookie": "^4.0.0",
     "yaml": "^1.10.2"
