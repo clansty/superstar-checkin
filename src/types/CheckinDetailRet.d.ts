@@ -1,202 +1,204 @@
 export default interface CheckinDetailRet {
 
-    result: number;
+  result: number;
 
-    msg: string;
+  msg: string;
 
-    data: Data;
+  data: Data;
 
-    errorMsg: object;
+  errorMsg: object;
 
 }
 
 
 interface Data {
 
-    fid: object;
+  fid: object;
 
-    bsid: object;
+  bsid: object;
 
-    locationText: string;
+  locationText: string;
 
-    viewPicPath: string;
+  viewPicPath: string;
 
-    scoreWeight: object;
+  scoreWeight: object;
 
-    source: number;
+  source: number;
 
-    starttime: number;
+  starttime: number;
 
-    oldActiveId: object;
+  oldActiveId: object;
 
-    grouptype: object;
+  grouptype: object;
 
-    createuidname: object;
+  createuidname: object;
 
-    activeSort: number;
+  activeSort: number;
 
-    clazzid: number;
+  clazzid: number;
 
-    id: number;
+  id: number;
 
-    credit: object;
+  credit: object;
 
-    newOld: object;
+  newOld: object;
 
-    courseId: object;
+  courseId: object;
 
-    jwCourseId: object;
+  jwCourseId: object;
 
-    day: number;
+  day: number;
 
-    longitude: object;
+  longitude: object;
 
-    addToCacheTime: number;
+  addToCacheTime: number;
 
-    createxxuid: string;
+  createxxuid: string;
 
-    isclone: number;
+  isclone: number;
 
-    locationRange: string;
+  locationRange: string;
 
-    chatid: object;
+  chatid: object;
 
-    ifaveraged: object;
+  ifaveraged: object;
 
-    sfdp: object;
+  sfdp: object;
 
-    sffxs: object;
+  sffxs: object;
 
-    sxs: object;
+  sxs: object;
 
-    oldOtherId: object;
+  oldOtherId: object;
 
-    activeType: number;
+  activeType: number;
 
-    endtimes: object;
+  endtimes: object;
 
-    name: string;
+  name: string;
 
-    status: number;
+  status: number;
 
-    isold: object;
+  isold: object;
 
-    ifsendmessage: object;
+  ifsendmessage: object;
 
-    ifcommit: object;
+  ifcommit: object;
 
-    normscore: object;
+  normscore: object;
 
-    ismark: object;
+  ismark: object;
 
-    timeLong: number;
+  timeLong: number;
 
-    userStatus: object;
+  userStatus: object;
 
-    isbackfill: object;
+  isbackfill: object;
 
-    stuid: object;
+  stuid: object;
 
-    currentversion: object;
+  currentversion: object;
 
-    latitude: object;
+  latitude: object;
 
-    pActiveId: object;
+  pActiveId: object;
 
-    zhjsid: object;
+  zhjsid: object;
 
-    signCode: string;
+  signCode: string;
 
-    title: object;
+  title: object;
 
-    manual: boolean;
+  manual: boolean;
 
-    content: object;
+  content: object;
 
-    parentid: number;
+  parentid: number;
 
-    nowTime: number;
+  nowTime: number;
 
-    showOpenTimer: number;
+  showOpenTimer: number;
 
-    activityTranMode: object;
+  activityTranMode: object;
 
-    ifrefreshewm: number;
+  ifrefreshewm: number;
 
-    realActiveId: object;
+  realActiveId: object;
 
-    isresult: number;
+  isresult: number;
 
-    pptPlanId: number;
+  pptPlanId: number;
 
-    attendNum: number;
+  attendNum: number;
 
-    isnorm: object;
+  isnorm: object;
 
-    hour: number;
+  hour: number;
 
-    dpurl: object;
+  dpurl: object;
 
-    isbegins: object;
+  isbegins: object;
 
-    createtime: number;
+  createtime: number;
 
-    currentstatus: object;
+  currentstatus: object;
 
-    ifphoto: number;
+  ifphoto: number;
 
-    otherId: number;
+  otherId: number;
 
-    endtime: number;
+  endtime: number;
 
-    showhide: object;
+  showhide: object;
 
-    endtimeStr: string;
+  endtimeStr: string;
 
-    userName: object;
+  userName: object;
 
-    ifopenAddress: number;
+  ifopenAddress: number;
 
-    pptnum: number;
+  pptnum: number;
 
-    releaseNum: number;
+  releaseNum: number;
 
-    editconfig: object;
+  editconfig: object;
 
-    url: object;
+  url: object;
 
-    minute: number;
+  minute: number;
 
-    iphoneContent: object;
+  iphoneContent: object;
 
-    starttimeStr: string;
+  starttimeStr: string;
 
-    chartid: string;
+  chartid: string;
 
-    jurl: object;
+  jurl: object;
 
-    createtimeStr: string;
+  createtimeStr: string;
 
-    isanony: object;
+  isanony: object;
 
-    starttimes: object;
+  starttimes: object;
 
-    isdelete: number;
+  isdelete: number;
 
-    endTime: number;
+  endTime: number;
 
-    attendPer: object;
+  attendPer: object;
 
-    ifgetrange: object;
+  ifgetrange: object;
 
-    updatetime: number;
+  updatetime: number;
 
-    islook: object;
+  islook: object;
 
-    createuid: string;
+  createuid: string;
 
-    mark: object;
+  mark: object;
 
+  locationLongitude: string;
+  locationLatitude: string;
 }
 
 
