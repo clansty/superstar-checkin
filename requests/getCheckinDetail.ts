@@ -20,6 +20,7 @@ export default async (cookie: string, activeId: number | string): Promise<Checki
         },
     })
 
+    let location = null
     if (ret.data.result === 1) {
         let type: 'qr' | 'gesture' | 'location' | 'photo' | 'normal'
         switch (ret.data.data.otherId) {
@@ -31,13 +32,22 @@ export default async (cookie: string, activeId: number | string): Promise<Checki
                 break
             case 4:
                 type = 'location'
+                if (ret.data.data.ifopenAddress) {
+                    // 是指定位置的签到
+                    location = {
+                        address: ret.data.data.locationText,
+                        lat: ret.data.data.locationLatitude,
+                        lon: ret.data.data.locationLongitude,
+                        range: ret.data.data.locationRange,
+                    };
+                }
                 break
             default:
                 type = ret.data.data.ifphoto ? 'photo' : 'normal'
         }
 
         return {
-            type,
+            type, location
         }
     }
     const err = '查询签到详情时遇到问题，activeId: ' + activeId

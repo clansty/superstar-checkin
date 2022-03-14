@@ -49,7 +49,11 @@ export default async (message: ImMessageCheckin, cookie: string) => {
                 const sleepTime = getRandomIntInclusive(20, 35)
                 if (checkinInfo.type !== 'qr') {
                     info('收到', checkinInfo.type, '类型签到，延迟时间', sleepTime, '秒')
-                    pushQMsg(`收到 ${courseName} 的签到\n类型：${checkinInfo.type}\naid:${aid}\n将在 ${sleepTime} 秒后自动签到`)
+                    let messageToSend = `收到 ${courseName} 的签到\n类型：${checkinInfo.type}\naid:${aid}\n将在 ${sleepTime} 秒后自动签到`
+                    if(checkinInfo.location){
+                        messageToSend+=`\n这是位置范围签到\n地址：${checkinInfo.location.address}\n精度：${checkinInfo.location.range}\n经纬度：${checkinInfo.location.lon},${checkinInfo.location.lat}`
+                    }
+                    pushQMsg(messageToSend)
                     setTimeout(async () => {
                         pushQMsg(await handleSign(aid, courseId, checkinInfo))
                     }, sleepTime * 1000)

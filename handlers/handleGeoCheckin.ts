@@ -17,8 +17,10 @@ const inferCourseGeoInfo = (geoLocations: Array<GeoLocation>, courseId: number) 
     }
 }
 
-export default async (activeId: string | number, courseId: number, account: AccountMetaData) => {
-    const geoInfo = inferCourseGeoInfo(config.geoLocations, courseId)
+export default async (activeId: string | number, courseId: number, account: AccountMetaData, geoInfo?: GeoLocation) => {
+    if (!geoInfo) {
+        geoInfo = inferCourseGeoInfo(config.geoLocations, courseId)
+    }
     let params
 
     if (geoInfo) {

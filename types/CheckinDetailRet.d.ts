@@ -197,6 +197,9 @@ interface Data {
 
     mark: object;
 
+    locationLongitude: string;
+
+    locationLatitude: string;
 }
 
 

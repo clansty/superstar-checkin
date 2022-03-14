@@ -15,7 +15,7 @@ export default async (aid: string | number, courseId: number, checkinInfo: Check
             info('开始签到', account.username)
             let ret = ''
             if (checkinInfo.type === 'location')
-                ret = await handleGeoCheckin(aid, courseId, accountMeta)
+                ret = await handleGeoCheckin(aid, courseId, accountMeta, checkinInfo.location)
             else
                 ret = await handlerSimpleCheckin(aid, accountMeta)
             res += ret
