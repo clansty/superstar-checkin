@@ -5,8 +5,8 @@
   "main": "index.ts",
   "scripts": {
     "start": "node build/index.js",
-    "dev": "ts-node index.ts",
-    "build": "tsc && cp -a --reflink=auto --remove-destination ./sdk ./build/"
+    "dev": "ts-node src/index.ts",
+    "build": "tsc && cp -a --reflink=auto --remove-destination ./src/sdk ./build/"
   },
   "keywords": [],
   "author": "",
@@ -14,19 +14,23 @@
   "devDependencies": {
     "@types/jsdom": "^16.2.13",
     "@types/node": "^16.9.2",
+    "prisma": "^3.10.0",
     "ts-node": "^10.2.1",
     "tsc": "^2.0.3",
     "typescript": "^4.4.3"
   },
   "dependencies": {
+    "@prisma/client": "^3.10.0",
     "axios": "^0.21.4",
     "axios-cookiejar-support": "^2.0.0",
     "chalk": "^4.1.2",
     "cheerio": "^1.0.0-rc.10",
     "jimp": "^0.16.1",
     "jsdom": "^17.0.0",
+    "log4js": "^6.4.2",
     "oicq": "^2.1.8",
     "qrcode-reader": "^1.0.4",
+    "telegram": "^2.5.3",
     "tough-cookie": "^4.0.0",
     "yaml": "^1.10.2"
   },

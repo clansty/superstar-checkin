@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
-    "target": "ES2017",
+    "target": "ESNext",
     "esModuleInterop": true,
     "sourceMap": false,
     "moduleResolution": "Node",
