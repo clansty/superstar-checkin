@@ -4,6 +4,7 @@ import config from '../providers/config'
 import AccountMetaData from '../types/AccountMetaData'
 import handlerSimpleCheckin from './handleSimpleCheckin'
 import GeoLocation from '../types/GeoLocation'
+import {warn} from "../utils/log";
 
 const inferCourseGeoInfo = (geoLocations: Array<GeoLocation>, courseId: number) => {
     const weekDay = new Date().getDay()
@@ -14,6 +15,12 @@ const inferCourseGeoInfo = (geoLocations: Array<GeoLocation>, courseId: number) 
         else if (location.onlyOnWeekdays && location.onlyOnWeekdays.includes(weekDay)) {
             return location
         }
+    }
+    // 使用 fallback 位置
+    const fallback = geoLocations.find(e => e.courseId === "*")
+    if (fallback) {
+        warn(`课程 ID ${courseId} 没有设置位置信息，使用 fallback 位置`)
+        return fallback
     }
 }
 
@@ -33,8 +40,7 @@ export default async (activeId: string | number, courseId: number, account: Acco
             address: geoInfo.address,
         })
         return await checkin(account.cookie, params)
-    }
-    else {
+    } else {
         console.warn(`课程 ID ${courseId} 没有设置位置信息，将不提交位置信息`)
         return (await handlerSimpleCheckin(activeId, account)) + `\n警告：课程 ID ${courseId} 没有设置位置信息，将不提交位置信息`
     }
