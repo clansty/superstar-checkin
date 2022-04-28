@@ -1,4 +1,4 @@
-import {info, success} from './utils/log'
+import {info} from './utils/log'
 import * as db from './providers/db'
 import {loginBot} from './providers/bot'
 import axios from 'axios'
