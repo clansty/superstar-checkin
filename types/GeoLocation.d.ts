@@ -1,5 +1,5 @@
 export default interface GeoLocation {
-    courseId: number
+    courseId: number | string,
     lat: number,
     lon: number,
     address: string
