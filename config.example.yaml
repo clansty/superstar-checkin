@@ -15,15 +15,15 @@ geoLocations:
     lon: 纬度，请务必用 Readme 中的百度地图工具查询
     address: 地图显示的地址，建议去实地发个签到查看学习通上显示的地址
   - courseId: 另一门课的 ID，假装这门课不同天在不同的地方上课
-    lat: 经度
-    lon: 纬度，请务必用 Readme 中的百度地图工具查询
+    lon: 经度
+    lat: 纬度，请务必用 Readme 中的百度地图工具查询
     address: 地图显示的地址，建议去实地发个签到查看学习通上显示的地址
     onlyOnWeekdays:
       # 数字表示的星期，0：周日，1：周一...
       - 1
   - courseId: 还是刚刚那一门课的 ID，这里写的是不在上一条那些天里面的地理位置
-    lat: 另外的经度
-    lon: 另外的纬度
+    lon: 另外的经度
+    lat: 另外的纬度
     address: 更上面的更优先，同一门课程请把没有 onlyOnWeekdays 的写在最下面
 # 可以配置多个账号，将使用第一个账号获取签到信息，所以第一个账号的课需要是全的
 accounts:
