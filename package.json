@@ -22,7 +22,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "axios-cookiejar-support": "^4.0.3",
-    "chalk": "^5.0.1",
+    "chalk": "4",
     "cheerio": "1.0.0-rc.12",
     "jimp": "^0.16.1",
     "jsdom": "^20.0.0",
