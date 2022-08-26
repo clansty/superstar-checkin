@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
-    "target": "ES2017",
+    "target": "ESNext",
     "esModuleInterop": true,
-    "sourceMap": false,
+    "sourceMap": true,
     "moduleResolution": "Node",
     "outDir": "build",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
   },
   "exclude": [
     "node_modules"
