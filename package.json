@@ -13,23 +13,23 @@
   "author": "",
   "license": "GPL-3.0",
   "devDependencies": {
-    "@types/jsdom": "^16.2.13",
-    "@types/node": "^16.9.2",
+    "@types/jsdom": "^20.0.0",
+    "@types/node": "^16.11.56",
     "ts-node": "^10.2.1",
     "tsc": "^2.0.3",
     "typescript": "^4.4.3"
   },
   "dependencies": {
-    "axios": "^0.21.4",
-    "axios-cookiejar-support": "^2.0.0",
+    "axios": "^0.27.2",
+    "axios-cookiejar-support": "^4.0.3",
     "chalk": "^4.1.2",
-    "cheerio": "^1.0.0-rc.10",
+    "cheerio": "^1.0.0-rc.12",
     "jimp": "^0.16.1",
-    "jsdom": "^17.0.0",
-    "oicq": "^2.2.0",
+    "jsdom": "^20.0.0",
+    "oicq": "^2.3.1",
     "qrcode-reader": "^1.0.4",
-    "tough-cookie": "^4.0.0",
-    "yaml": "^1.10.2"
+    "tough-cookie": "^4.1.2",
+    "yaml": "^2.1.1"
   },
   "packageManager": "yarn@3.1.0"
 }
