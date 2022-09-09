@@ -3,6 +3,5 @@
     buildInputs = with pkgs; [
       yarn
       nodejs-18_x
-      libwebp
     ];
 }

@@ -8,6 +8,7 @@ export const loginBot = () => new Promise<any>(resolve => {
   if (config.bot.uin === 'disabled') return resolve(0)
   bot = new Client(config.bot.uin, {
     log_level: 'warn',
+    data_dir: process.env.DATA_DIR,
   })
   bot.once('system.online', resolve)
   bot.login(config.bot.password)

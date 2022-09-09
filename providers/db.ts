@@ -3,12 +3,12 @@ import fsOrigin from 'fs'
 
 let meta: Record<string, any> = {}
 
+const jsonFile = process.env.DATA_DIR ? process.env.DATA_DIR + '/superstar-data.json' : './data/superstar-data.json'
+
 export const connect = async () => {
     try {
         // 按道理可以改成同步的，但是懒得手动返回 Promise 了
-        const metaStream = await fs.readFile(
-            './data/superstar-data.json',
-        )
+        const metaStream = await fs.readFile(jsonFile)
         const metaStr = metaStream.toString()
         meta = JSON.parse(metaStr)
     } catch (error) {
@@ -23,14 +23,14 @@ export const getMeta = async <T>(name: string) => {
 export const setMeta = async <T>(name: string, value: T) => {
     meta[name] = value
     await fs.writeFile(
-        './data/superstar-data.json',
+        jsonFile,
         JSON.stringify(meta, null, 2),
     )
 }
 
 process.on('SIGINT', () => {
     fsOrigin.writeFileSync(
-        './data/superstar-data.json',
+        jsonFile,
         JSON.stringify(meta, null, 2),
     )
     process.exit(0)

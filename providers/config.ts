@@ -16,4 +16,4 @@ interface Config {
     accounts: Array<Account>
 }
 
-export default YAML.parse(fs.readFileSync('config.yaml', 'utf-8')) as Config
+export default YAML.parse(fs.readFileSync(process.env.CONFIG_FILE || 'config.yaml', 'utf-8')) as Config

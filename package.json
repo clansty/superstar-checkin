@@ -2,13 +2,16 @@
   "name": "superstar-checkin",
   "version": "2.1.0",
   "description": "",
-  "main": "index.ts",
   "scripts": {
     "start": "node build/index.js",
     "start-docker": "node index.js",
     "dev": "ts-node index.ts",
     "build": "tsc && cp -a --reflink=auto --remove-destination ./sdk ./build/"
   },
+  "bin": "build/index.js",
+  "files": [
+    "build"
+  ],
   "keywords": [],
   "author": "",
   "license": "GPL-3.0",
