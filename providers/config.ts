@@ -10,6 +10,7 @@ interface Config {
         notifyGroups: number[];
         qrcodeGroups: number[];
         ignore?: number[];
+        platform?: number;
     };
     ignoreCourses: number[];
     geoLocations: Array<GeoLocation>

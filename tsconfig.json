@@ -8,6 +8,9 @@
     "outDir": "build",
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
+    "lib": [
+      "ESNext"
+    ]
   },
   "exclude": [
     "node_modules"

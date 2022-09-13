@@ -9,6 +9,7 @@ export const loginBot = () => new Promise<any>(resolve => {
   bot = new Client(config.bot.uin, {
     log_level: 'warn',
     data_dir: process.env.DATA_DIR,
+    platform: config.bot.platform || 5,
   })
   bot.once('system.online', resolve)
   bot.login(config.bot.password)

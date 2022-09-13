@@ -1,5 +1,6 @@
 bot:
   uin: qq机器人的qq号，或者 `disabled` 可以禁用机器人组件。禁用的话，二维码签到也没有入口了
+  platform: 5 # Android = 1, aPad = 2, Watch = 3, iMac = 4, iPad = 5,
   password: 机器人qq密码
   notifyGroups:
     - 签到时通知的群组
