@@ -1,0 +1,8 @@
+version: "3.8"
+services:
+  superstar:
+    image: ghcr.io/clansty/superstar-checkin:main
+    container_name: main_superstar
+    restart: unless-stopped
+    volumes:
+      - ./config.yaml:/app/config.yaml
