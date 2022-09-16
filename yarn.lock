@@ -1432,7 +1432,7 @@ __metadata:
     long: ^4.0.0
     pngjs: ^6.0.0
     probe-image-size: ^7.2.2
-  checksum: 86fa401358d81de360784ac58317b4a0232e7a7379f62941ef5fb3e31a42647ad4b78f55841620b228e0dfd3c7fd0281b5ccea7e1e45d1c708f4857a90fe690a
+  checksum: 27932ed34fc2fafd6aa6a2f7b4ed361ade6caed98b1b36c465c011f7716240c6c44bec1d8c36f52c878bc1f28df03c485236bd93932cdd462509401471b7be21
   languageName: node
   linkType: hard
 
