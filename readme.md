@@ -37,11 +37,33 @@
 
   机器人命令：`签到 {aid} [enc(二维码签到时)|courseId(位置签到时。不需要提交位置可以不填)]`
 
-- [ ] Docker 和 Docker Compose 部署
+- [x] Docker 和 Docker Compose 部署
 
 - [ ] 通过 REST API 设置课程信息
 
 ## 部署方法
+
+### 使用 Docker Compose 部署
+
+1. 下载 [docker-compose.yaml](https://github.com/Clansty/superstar-checkin/raw/main/docker-compose.yaml) 和 [config.example.yaml](https://github.com/Clansty/superstar-checkin/raw/main/config.example.yaml)，将它们放在一个文件夹中
+2. 将 `config.example.yaml` 重命名为 `config.yaml`
+3. 修改 `config.yaml` 中的配置项
+4. `docker compose up`
+
+### 使用 NixOS 部署
+
+1. 在你的系统 Flake 中，引入本项目
+
+    ```nix
+    inputs.superstar-checkin.url = "github:clansty/superstar-checkin";
+    ```
+
+2. 在系统配置的某个 Module 中填写配置项（[查看示例](./config.example.nix)）
+3. `nixos-rebuild switch`
+
+可以使用 `systemctl status superstar-checkin` 来查看状态
+
+### 手动部署
 
 1. 安装 NodeJS 14 以上版本
 2. `yarn install`
