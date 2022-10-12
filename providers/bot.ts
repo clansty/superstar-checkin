@@ -1,6 +1,7 @@
 import {Client, Sendable} from 'oicq'
 import config from './config'
 import attachGroupMessageHandler from '../handlers/attachGroupMessageHandler'
+import {error} from '../utils/log'
 
 let bot: Client
 
@@ -19,12 +20,20 @@ export const loginBot = () => new Promise<any>(resolve => {
 
 export const pushQMsg = async (message: Sendable) => {
   if (config.bot.uin === 'disabled') return
-  for (const group of config.bot.notifyGroups) {
-    await bot.pickGroup(group).sendMsg(message)
+  try {
+    for (const group of config.bot.notifyGroups) {
+      await bot.pickGroup(group).sendMsg(message)
+    }
+  } catch (e) {
+    error('QQ 消息发送失败', e)
   }
 }
 
 export const pushQMsgToFirstGroup = async (message: Sendable) => {
   if (config.bot.uin === 'disabled') return
-  await bot.pickGroup(config.bot.notifyGroups[0]).sendMsg(message)
+  try {
+    await bot.pickGroup(config.bot.notifyGroups[0]).sendMsg(message)
+  } catch (e) {
+    error('QQ 消息发送失败', e)
+  }
 }
