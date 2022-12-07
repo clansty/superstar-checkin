@@ -29,7 +29,7 @@ export default (bot: Client) => bot.on('message.group', async data => {
             const dec = await decodeQrCode(buf)
             let message = '二维码解码：\n' + dec + '\n'
             //解析签到参数
-            const REGEX_ENC = /e\?.*id=(\d+)&.*&enc=([\dA-F]+)/
+            const REGEX_ENC = /(SIGNIN:|e\?).*(aid=|id=)(\d+)(&.*)?&enc=([\dA-F]+)/
             if (REGEX_ENC.test(dec)) {
                 const exec = REGEX_ENC.exec(dec)
                 message += `aid: ${exec[1]}\nenc: ${exec[2]}\n正在执行签到...`
