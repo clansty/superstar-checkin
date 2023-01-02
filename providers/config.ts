@@ -12,6 +12,7 @@ interface Config {
         qrcodeGroups: number[];
         ignore?: number[];
         platform?: number;
+        data_dir: string;
     };
     ocr: {
         secretId: string;
