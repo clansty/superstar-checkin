@@ -29,14 +29,14 @@ export default (bot: Client) => bot.on('message.group', async data => {
             const REGEX_ENC = /(SIGNIN:|e\?).*(aid=|id=)(\d+)(&.*)?&enc=([\dA-F]+)/
             if (REGEX_ENC.test(dec)) {
                 const exec = REGEX_ENC.exec(dec)
-                message += `aid: ${exec[1]}\nenc: ${exec[2]}\n正在执行签到...`
+                message += `\naid: ${exec[3]}\nenc: ${exec[5]}\n正在执行签到...`
                 data.reply(message)
                 let res = ''
                 for (const account of config.accounts) {
                     const accountMeta = await accountsManager.getAccountData(account.username)
                     res += '\n' + accountMeta.name + '：'
                     info('开始签到', account.username)
-                    const ret = await handlerQrcodeSign(exec[1], exec[2], accountMeta)
+                    const ret = await handlerQrcodeSign(exec[3], exec[5], accountMeta)
                     res += ret
                     info('签到结束', account.username, ret)
                 }
@@ -45,7 +45,7 @@ export default (bot: Client) => bot.on('message.group', async data => {
             else
                 data.reply(message)
         } catch (e) {
-            data.reply(`二维码解码失败：${e}`)
+            info(`二维码解码失败：${e}`)
         }
     }
     else {
