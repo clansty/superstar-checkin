@@ -1,16 +1,27 @@
-import jimp from 'jimp'
-import QrCode from 'qrcode-reader'
+const tencentcloud = require("tencentcloud-sdk-nodejs");
+const OcrClient = tencentcloud.ocr.v20181119.Client;
+import config from '../providers/config'
 
 export default (buf: Buffer) => new Promise<string>(async (resolve, reject) => {
-    const jimpImg = await jimp.read(buf)
-    const qrcode = new QrCode()
-    qrcode.callback = (err, value) => {
-        if (err) {
-            reject(err)
-        }
-        else {
-            resolve(value.result)
-        }
-    }
-    qrcode.decode(jimpImg.bitmap)
+    const client = new OcrClient({
+      credential: {
+        secretId: config.ocr.secretId,
+        secretKey: config.ocr.secretKey
+      },
+      region: "ap-shanghai",
+      profile: {
+        httpProfile: {
+          endpoint: "ocr.tencentcloudapi.com",
+        },
+      },
+    });
+    client.QrcodeOCR({
+      "Image": buf
+    }).then(
+      (data: any) => {
+        resolve(data);
+      }, (err: any) => {
+        reject(err);
+      }
+    );
 })

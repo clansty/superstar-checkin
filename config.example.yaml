@@ -1,5 +1,6 @@
 bot:
   uin: qq机器人的qq号，或者 `disabled` 可以禁用机器人组件。禁用的话，二维码签到也没有入口了
+  qrlogin: true
   platform: 5 # Android = 1, aPad = 2, Watch = 3, iMac = 4, iPad = 5,
   password: 机器人qq密码
   notifyGroups:
@@ -8,6 +9,9 @@ bot:
     - 接收二维码的群组，有些群组不希望用来接收二维码
   ignore:
     - 忽略接收二维码群组内某个群成员发送的消息，一般指定同一群的其他机器人
+ocr:
+  secretId:
+  secretKey:
 ignoreCourses:
   - 屏蔽的课程 ID，这些课程的签到和其他活动信息将被忽略
 geoLocations:
