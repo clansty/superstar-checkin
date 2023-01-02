@@ -19,7 +19,7 @@ export default (url: string) => new Promise<string>(async (resolve, reject) => {
       "ImageUrl": url
     }).then(
       (data: any) => {
-        resolve(data);
+        resolve(data.CodeResults[0].Url);
       }, (err: any) => {
         reject(err);
       }
