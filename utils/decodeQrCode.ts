@@ -16,7 +16,7 @@ export default (url: string) => new Promise<string>(async (resolve, reject) => {
       },
     });
     client.QrcodeOCR({
-      "Image": url
+      "ImageUrl": url
     }).then(
       (data: any) => {
         resolve(data);
