@@ -26,7 +26,7 @@ export default (bot: Client) => bot.on('message.group', async data => {
             responseType: 'arraybuffer',
         })).data
         try {
-            const dec = await decodeQrCode(buf)
+            const dec = await decodeQrCode(imageElem.url)
             let message = '二维码解码：\n' + dec + '\n'
             //解析签到参数
             const REGEX_ENC = /(SIGNIN:|e\?).*(aid=|id=)(\d+)(&.*)?&enc=([\dA-F]+)/
