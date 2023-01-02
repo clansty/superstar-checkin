@@ -14,8 +14,8 @@ interface Config {
         platform?: number;
     };
     ocr: {
-        secretId: number;
-        secretKey: number;
+        secretId: string;
+        secretKey: string;
     }
     ignoreCourses: number[];
     geoLocations: Array<GeoLocation>
