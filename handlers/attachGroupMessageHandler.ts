@@ -76,10 +76,13 @@ export default (bot: Client) => bot.on('message.group', async data => {
                     let res = ''
                     for (const account of config.accounts) {
                         const accountMeta = await accountsManager.getAccountData(account.username)
-                        res += '\n' + accountMeta.name + '：'
+                        res += accountMeta.name + '：'
                         info('开始签到', account.username)
                         const ret = await handlerQrcodeSign(aid, enc, accountMeta)
-                        res += ret
+                        switch (ret) {
+                            case 'success': res += '成功' + '\n'; break;
+                            default: res += ret + '\n'; break;
+                        }
                         info('签到结束', account.username, ret)
                     }
                     data.reply(res)
