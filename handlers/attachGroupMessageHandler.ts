@@ -31,15 +31,15 @@ export default (bot: Client) => bot.on('message.group', async data => {
                 const exec = REGEX_ENC.exec(dec)
                 message += `\naid: ${exec[3]}\nenc: ${exec[5]}\n正在执行签到...`
                 data.reply(message)
-                let res = ''
+                let res = '自动签到：'
                 for (const account of config.accounts) {
                     const accountMeta = await accountsManager.getAccountData(account.username)
-                    res += accountMeta.name + '：'
+                    res += '\n' + accountMeta.name + '：'
                     info('开始签到', account.username)
                     const ret = await handlerQrcodeSign(exec[3], exec[5], accountMeta)
                     switch (ret) {
-                        case 'success': res += '成功' + '\n'; break;
-                        default: res += ret + '\n'; break;
+                        case 'success': res += '成功'; break;
+                        default: res += ret; break;
                     }
                     info('签到结束', account.username, ret)
                 }
@@ -76,15 +76,15 @@ export default (bot: Client) => bot.on('message.group', async data => {
                     }
                     const enc = args[1]
                     data.reply(`aid: ${aid}\nenc: ${enc}\n正在执行签到...`)
-                    let res = ''
+                    let res = '自动签到：'
                     for (const account of config.accounts) {
                         const accountMeta = await accountsManager.getAccountData(account.username)
-                        res += accountMeta.name + '：'
+                        res += '\n' + accountMeta.name + '：'
                         info('开始签到', account.username)
                         const ret = await handlerQrcodeSign(aid, enc, accountMeta)
                         switch (ret) {
-                            case 'success': res += '成功' + '\n'; break;
-                            default: res += ret + '\n'; break;
+                            case 'success': res += '成功'; break;
+                            default: res += ret; break;
                         }
                         info('签到结束', account.username, ret)
                     }
