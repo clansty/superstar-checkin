@@ -27,13 +27,11 @@
     "axios-cookiejar-support": "^4.0.3",
     "chalk": "4",
     "cheerio": "1.0.0-rc.12",
-    "jimp": "^0.16.1",
     "jsdom": "^20.0.0",
     "oicq": "git+https://github.com/Clansty/oicq#commit=6c3f34adc681e73c2511f1f49a79fb387dcd1555",
-    "qrcode-reader": "^1.0.4",
+    "tencentcloud-sdk-nodejs": "^4.0.421",
     "tough-cookie": "^4.1.2",
-    "yaml": "^2.1.1",
-    "tencentcloud-sdk-nodejs": "^4.0.421"
+    "yaml": "^2.1.1"
   },
   "packageManager": "yarn@3.2.3"
 }
