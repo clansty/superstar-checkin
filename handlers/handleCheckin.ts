@@ -18,7 +18,10 @@ export default async (aid: string | number, courseId: number, checkinInfo: Check
                 ret = await handleGeoCheckin(aid, courseId, accountMeta, checkinInfo.location)
             else
                 ret = await handlerSimpleCheckin(aid, accountMeta)
-            res += ret
+            switch (ret) {
+                case 'success': res += '成功'; break;
+                default: res += ret; break;
+            }
             info('签到结束', account.username, ret)
         }
         return `自动签到：\naid:${aid}${res}`

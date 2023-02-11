@@ -32,7 +32,8 @@
     "oicq": "git+https://github.com/Clansty/oicq#commit=6c3f34adc681e73c2511f1f49a79fb387dcd1555",
     "qrcode-reader": "^1.0.4",
     "tough-cookie": "^4.1.2",
-    "yaml": "^2.1.1"
+    "yaml": "^2.1.1",
+    "tencentcloud-sdk-nodejs": "^4.0.421"
   },
   "packageManager": "yarn@3.2.3"
 }

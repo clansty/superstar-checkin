@@ -6,12 +6,18 @@ import GeoLocation from '../types/GeoLocation'
 interface Config {
     bot: {
         uin: number | 'disabled';
+        qrlogin: boolean;
         password: string;
         notifyGroups: number[];
         qrcodeGroups: number[];
         ignore?: number[];
         platform?: number;
+        data_dir: string;
     };
+    ocr: {
+        secretId: string;
+        secretKey: string;
+    }
     ignoreCourses: number[];
     geoLocations: Array<GeoLocation>
     accounts: Array<Account>
