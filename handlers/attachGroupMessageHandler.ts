@@ -1,4 +1,4 @@
-import {Client, ImageElem} from 'oicq'
+import { Client, ImageElem } from 'icqq'
 import config from '../providers/config'
 import {info} from '../utils/log'
 import axios from 'axios'
