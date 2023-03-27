@@ -71,7 +71,7 @@
 4. `yarn build`
 5. `yarn start`
 
-提示：机器人使用的账号必须已经在 [oicq](https://github.com/takayama-lily/oicq) 框架上登录过
+提示：机器人使用的账号必须已经在 [icqq](https://github.com/icqqjs/icqq) 框架上登录过
 
 ## 限制
 
